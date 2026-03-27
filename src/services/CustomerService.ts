@@ -3,7 +3,6 @@ import { Customer, CreateCustomerData, UpdateCustomerData } from '@/types';
 
 interface FindAllParams {
     search?: string;
-
 }
 
 export async function findAllCustomers(
