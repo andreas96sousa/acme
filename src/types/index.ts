@@ -43,5 +43,5 @@ export interface ApiResponse<GENERIC> {
 
 export interface ApiError{
     error: string;
-    details?: unknown;
+    details?: Record<string, string[]>;
 };
