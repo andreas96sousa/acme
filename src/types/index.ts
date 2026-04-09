@@ -1,3 +1,5 @@
+import { inter } from '@/app/ui/fonts';
+
 export interface User {
   id: string;
   name: string;
@@ -37,11 +39,34 @@ export interface Revenue {
 }
 
 export interface ApiResponse<GENERIC> {
-    data: GENERIC;
-    message?: string;
-};
+  data: GENERIC;
+  message?: string;
+}
 
-export interface ApiError{
-    error: string;
-    details?: Record<string, string[]>;
-};
+export interface ApiError {
+  error: string;
+  details?: Record<string, string[]>;
+}
+
+export type SortOrder = 'asc' | 'desc';
+
+export interface FindAllCustomersParams {
+  search?: string;
+  page?: number;
+  limit?: number;
+  sortBy?: string;
+  order?: SortOrder;
+}
+
+export interface PaginationMeta {
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+  hasMore: boolean;
+}
+
+export interface PaginatedResponse<GENERIC> {
+  data: GENERIC[];
+  message: PaginationMeta
+}
