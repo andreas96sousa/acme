@@ -68,5 +68,5 @@ export interface PaginationMeta {
 
 export interface PaginatedResponse<GENERIC> {
   data: GENERIC[];
-  message: PaginationMeta
+  meta: PaginationMeta
 }
