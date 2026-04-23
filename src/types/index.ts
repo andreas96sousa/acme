@@ -73,7 +73,7 @@ export interface Revenue {
 export interface DashboardMetrics {
   customerCount: number;
   invoiceCount: number;
-  totalPendent: number;
+  totalPendente: number;
   totalPago: number;
   countPendente: number;
   countPago: number;
