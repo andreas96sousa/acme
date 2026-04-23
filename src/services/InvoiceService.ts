@@ -4,13 +4,13 @@ import {
   CreateInvoiceData,
   UpdateInvoiceData,
   FindAllInvoiceParams,
-  PaginatedResponse,
-  InvoiceStatus
+  PaginatedReponse,
+  InvoiceStats
 } from '@/types';
 
 export async function findAllInvoices(
   params: FindAllInvoiceParams = {}
-): Promise<PaginatedResponse<Invoice>> {
+): Promise<PaginatedReponse<Invoice>> {
   const {
     search,
     page = 1,
@@ -163,7 +163,7 @@ export async function deleteInvoice(
   });
 };
 
-export async function getInvoiceStatus(): Promise<InvoiceStatus> {
+export async function getInvoiceStats(): Promise<InvoiceStats> {
   const [pendente, pago, total] = await Promise.all([
     prisma.invoice.aggregate({
       _sum: { amount: true },
@@ -179,10 +179,10 @@ export async function getInvoiceStatus(): Promise<InvoiceStatus> {
   ]);
 
   return {
-    totalPendente: pendente._sum?.amount ?? 0,
-    totalPago: pago._sum?.amount ?? 0,
-    countPendente: pendente._count?.id ?? 0,
-    countPago: pago._count?.id ?? 0,
+    totalPendente: pendente._sum.amount ?? 0,
+    totalPago: pago._sum.amount ?? 0,
+    countPendente: pendente._count.id,
+    countPago: pago._count.id,
     countTotal: total
   }
 };

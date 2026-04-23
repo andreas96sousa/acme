@@ -1,59 +1,24 @@
-import { inter } from '@/app/ui/fonts';
+export type SortOrder = 'asc' | 'desc';
 
 export interface User {
   id: string;
   name: string;
   email: string;
   password: string;
-}
+};
 
 export type CreateUserData = Omit<User, 'id'>;
-export type UpdateUserData = Partial<CreateUserData>;
+export type UpdateUserData = Partial<CreateUserData>
 
 export interface Customer {
   id: string;
   name: string;
   email: string;
   imageUrl: string;
-}
+};
 
 export type CreateCustomerData = Omit<Customer, 'id'>;
 export type UpdateCustomerData = Partial<CreateCustomerData>;
-
-export type InvoiceStatus = 'PAGO' | 'PENDENTE';
-
-export interface Invoice {
-  id: string;
-  amount: number;
-  date: Date;
-  status: InvoiceStatus;
-  customerId: string;
-  customer?: {
-    name: string;
-    email: string;
-    imageUrl: string;
-  }
-}
-
-export type CreateInvoiceData = Omit<Invoice, 'id' | 'customer'>;
-export type UpdateInvoiceData = Partial<CreateInvoiceData>;
-
-export interface Revenue {
-  month: string;
-  revenue: number;
-}
-
-export interface ApiResponse<GENERIC> {
-  data: GENERIC;
-  message?: string;
-}
-
-export interface ApiError {
-  error: string;
-  details?: Record<string, string[]>;
-}
-
-export type SortOrder = 'asc' | 'desc';
 
 export interface FindAllCustomersParams {
   search?: string;
@@ -61,14 +26,49 @@ export interface FindAllCustomersParams {
   limit?: number;
   sortBy?: string;
   order?: SortOrder;
-}
+};
+
+export type InvoiceStatus = 'PENDENTE' | 'PAGO';
+
+export interface Invoice {
+  id: string;
+  customerId: string;
+  amount: number;
+  date: Date;
+  status: InvoiceStatus;
+  customer?: {
+    name: string;
+    email: string;
+    imageUrl: string;
+  }
+};
+
+export type CreateInvoiceData = Omit<Invoice, 'id' | 'customer'>;
+export type UpdateInvoiceData = Partial<CreateInvoiceData>;
 
 export interface FindAllInvoiceParams {
   search?: string;
   page?: number;
   limit?: number;
   order?: SortOrder;
-}
+  status?: InvoiceStatus;
+  customerId?: string;
+  dateFrom?: string;
+  dateTo?: string;
+};
+
+export interface InvoiceStats {
+  totalPendente: number;
+  totalPago: number;
+  countPendente: number;
+  countPago: number;
+  countTotal: number;
+};
+
+export interface Revenue {
+  month: string;
+  revenue: number;
+};
 
 export interface PaginationMeta {
   total: number;
@@ -76,9 +76,19 @@ export interface PaginationMeta {
   limit: number;
   totalPages: number;
   hasMore: boolean;
-}
+};
 
-export interface PaginatedResponse<GENERIC> {
-  data: GENERIC[];
-  meta: PaginationMeta
-}
+export interface PaginatedReponse<T> {
+  data: T[];
+  meta: PaginationMeta;
+};
+
+export interface ApiResponse<T> {
+  data: T;
+  message?: string;
+};
+
+export interface ApiError {
+  error: string;
+  details?: Record<string, string[]>;
+};
