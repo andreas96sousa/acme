@@ -5,17 +5,17 @@ export interface User {
   name: string;
   email: string;
   password: string;
-};
+}
 
 export type CreateUserData = Omit<User, 'id'>;
-export type UpdateUserData = Partial<CreateUserData>
+export type UpdateUserData = Partial<CreateUserData>;
 
 export interface Customer {
   id: string;
   name: string;
   email: string;
   imageUrl: string;
-};
+}
 
 export type CreateCustomerData = Omit<Customer, 'id'>;
 export type UpdateCustomerData = Partial<CreateCustomerData>;
@@ -26,7 +26,7 @@ export interface FindAllCustomersParams {
   limit?: number;
   sortBy?: string;
   order?: SortOrder;
-};
+}
 
 export type InvoiceStatus = 'PENDENTE' | 'PAGO';
 
@@ -40,8 +40,8 @@ export interface Invoice {
     name: string;
     email: string;
     imageUrl: string;
-  }
-};
+  };
+}
 
 export type CreateInvoiceData = Omit<Invoice, 'id' | 'customer'>;
 export type UpdateInvoiceData = Partial<CreateInvoiceData>;
@@ -55,7 +55,7 @@ export interface FindAllInvoiceParams {
   customerId?: string;
   dateFrom?: string;
   dateTo?: string;
-};
+}
 
 export interface InvoiceStats {
   totalPendente: number;
@@ -63,12 +63,22 @@ export interface InvoiceStats {
   countPendente: number;
   countPago: number;
   countTotal: number;
-};
+}
 
 export interface Revenue {
   month: string;
   revenue: number;
-};
+}
+
+export interface DashboardMetrics {
+  customerCount: number;
+  invoiceCount: number;
+  totalPendent: number;
+  totalPago: number;
+  countPendente: number;
+  countPago: number;
+  revenue: Revenue[];
+}
 
 export interface PaginationMeta {
   total: number;
@@ -76,19 +86,19 @@ export interface PaginationMeta {
   limit: number;
   totalPages: number;
   hasMore: boolean;
-};
+}
 
 export interface PaginatedReponse<T> {
   data: T[];
   meta: PaginationMeta;
-};
+}
 
 export interface ApiResponse<T> {
   data: T;
   message?: string;
-};
+}
 
 export interface ApiError {
   error: string;
   details?: Record<string, string[]>;
-};
+}
