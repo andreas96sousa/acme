@@ -9,6 +9,17 @@ export interface User {
 
 export type CreateUserData = Omit<User, 'id'>;
 export type UpdateUserData = Partial<CreateUserData>;
+export type ResponseUser = Omit<User, 'password'>;
+
+export interface FindAllUsersParams {
+  search?: string;
+  page?: number;
+  limit?: number;
+  sortBy?: string;
+  order?: SortOrder;
+}
+
+export interface 
 
 export interface Customer {
   id: string;
@@ -88,7 +99,7 @@ export interface PaginationMeta {
   hasMore: boolean;
 }
 
-export interface PaginatedReponse<T> {
+export interface PaginatedResponse<T> {
   data: T[];
   meta: PaginationMeta;
 }
